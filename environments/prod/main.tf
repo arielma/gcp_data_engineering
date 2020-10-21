@@ -34,7 +34,6 @@ resource "google_composer_environment" "example-resource" {
       image_version = "composer-latest-airflow-x.y.z"
     }
   }
-  labels = {"env": "prod"}
 }
 
 resource "google_storage_bucket" "csv_load" {
