@@ -31,7 +31,7 @@ resource "google_composer_environment" "example-resource" {
       machine_type = "n1-standard-2"
     }
     software_config {
-      image_version = "composer-latest-airflow-x.y.z"
+      image_version = "composer-latest-airflow-1.10.6"
     }
   }
 }
