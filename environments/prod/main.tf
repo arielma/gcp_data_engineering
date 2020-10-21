@@ -21,20 +21,24 @@ provider "google" {
   project = "${var.project}"
 }
 
-module "vpc" {
-  source  = "../../modules/vpc"
-  project = "${var.project}"
-  env     = "${local.env}"
+resource "google_composer_environment" "example-resource" {
+  name   = "example-environment"
+  region = "australia-southeast1"
+
+  config {
+    node_config {
+      zone = "australia-southeast1-b"
+      machine_type = "n1-standard-2"
+    }
+    software_config {
+      image_version = "composer-latest-airflow-x.y.z"
+    }
+  }
+  labels = {"env": "prod"}
 }
 
-module "http_server" {
-  source  = "../../modules/http_server"
-  project = "${var.project}"
-  subnet  = "${module.vpc.subnet}"
-}
-
-module "firewall" {
-  source  = "../../modules/firewall"
-  project = "${var.project}"
-  subnet  = "${module.vpc.subnet}"
+resource "google_storage_bucket" "csv_load" {
+name = "csv_load"
+location = "australia-southeast1"
+storage_class = "REGIONAL"
 }
