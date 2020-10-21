@@ -1,0 +1,1 @@
+project="ariel-terraform-project"
